@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quiz Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .card {
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn-custom {
+        border-radius: 50px;
+        padding: 10px 20px;
+      }
+
+      h2 {
+        color: #0d6efd;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="text-center mb-4">
+      <h2>📊 Welcome to QuizConnect Dashboard</h2>
+      <p class="text-muted">Manage and participate in quizzes easily!</p>
+    </div>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <div class="card text-center p-4 shadow">
+            <h4 class="text-primary mb-3">👨‍💼 Admin Panel</h4>
+            <p>Manage quizzes, questions, and results.</p>
+            <a href="/admin/dashboard" class="btn btn-primary btn-custom"
+              >Go to Admin Dashboard</a
+            >
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card text-center p-4 shadow">
+            <h4 class="text-success mb-3">🎯 Participant Panel</h4>
+            <p>Take quizzes and view your scores.</p>
+            <a href="/participant/quizzes" class="btn btn-success btn-custom"
+              >Go to Participant Area</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <h5 class="text-secondary">
+          🧮 Total Quizzes: <span th:text="${totalQuizzes}"></span> | 🧍
+          Attempts: <span th:text="${totalAttempts}"></span>
+        </h5>
+      </div>
+    </div>
+  </body>
+</html>

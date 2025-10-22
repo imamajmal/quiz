@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quiz Result</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: linear-gradient(120deg, #f8f9fa, #e3f2fd);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .result-card {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: fadeIn 1s ease;
+        max-width: 600px;
+        width: 100%;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .score-circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 6px solid #0d6efd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28px;
+        font-weight: 700;
+        color: #0d6efd;
+        margin: 0 auto 20px;
+        background: #e3f2fd;
+      }
+
+      .btn-home {
+        background: linear-gradient(90deg, #007bff, #00bcd4);
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        padding: 10px 20px;
+        margin-top: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-home:hover {
+        background: linear-gradient(90deg, #0069d9, #00a2c2);
+        transform: translateY(-3px);
+      }
+
+      .feedback {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #198754;
+        margin-top: 15px;
+      }
+
+      .fail {
+        color: #dc3545;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="result-card">
+      <h2 class="text-primary fw-bold mb-3">🎯 Quiz Completed!</h2>
+
+      <!-- Quiz Title -->
+      <h4 th:text="'Quiz: ' + ${quizTitle}" class="mb-3"></h4>
+
+      <!-- Circle Score -->
+      <div class="score-circle">
+        <span th:text="${score}"></span>
+      </div>
+
+      <h5>✅ Your Score: <span th:text="${score}"></span></h5>
+
+      <!-- Optional percentage or message if you added to model -->
+      <div th:if="${percentage != null}">
+        <h6>📊 Percentage: <span th:text="${percentage} + '%'"></span></h6>
+      </div>
+
+      <!-- Feedback Message -->
+      <p class="feedback" th:if="${feedback != null}" th:text="${feedback}"></p>
+
+      <!-- Back Button -->
+      <a href="/participant/quizzes" class="btn btn-home mt-3"
+        >🏠 Back to Quiz List</a
+      >
+    </div>
+  </body>
+</html>

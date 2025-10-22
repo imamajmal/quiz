@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Available Quizzes</title>
+
+    <!-- ✅ Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+        min-height: 100vh;
+        padding-top: 60px;
+      }
+
+      .quiz-card {
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        background: #fff;
+      }
+
+      .quiz-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .quiz-title {
+        color: #007bff;
+        font-weight: bold;
+      }
+
+      .btn-take {
+        background: linear-gradient(90deg, #007bff, #00bcd4);
+        color: white;
+        border: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .btn-take:hover {
+        background: linear-gradient(90deg, #0069d9, #0097a7);
+        transform: translateY(-2px);
+      }
+
+      .header-bar {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .header-bar h2 {
+        font-weight: 700;
+        color: #0d6efd;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header-bar">
+        <h2>📘 Available Quizzes</h2>
+        <p class="text-muted">Choose a quiz below and test your skills!</p>
+      </div>
+
+      <div class="row" th:if="${#lists.isEmpty(quizzes)}">
+        <div class="col text-center">
+          <div class="alert alert-warning shadow-sm">
+            <h5>No quizzes available yet.</h5>
+            <p>Please check back later.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4" th:if="${!#lists.isEmpty(quizzes)}">
+        <div class="col-md-6 col-lg-4" th:each="quiz : ${quizzes}">
+          <div class="card quiz-card p-3">
+            <div class="card-body">
+              <h5 class="quiz-title" th:text="${quiz.title}">Quiz Title</h5>
+              <p class="text-muted mb-2" th:text="${quiz.description}">
+                Quiz Description
+              </p>
+              <p>
+                <strong>⏱ Time Limit:</strong>
+                <span th:text="${quiz.timeLimit}"></span> minutes
+              </p>
+
+              <a
+                th:href="@{'/participant/take-quiz/' + ${quiz.id}}"
+                class="btn btn-take w-100 mt-2"
+              >
+                🚀 Take Quiz
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✅ Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
